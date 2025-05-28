@@ -1,0 +1,10 @@
+{
+  "namespace": "com.nishant.contacts.avro",
+  "type": "record",
+  "name": "Contact",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "name", "type": "string"},
+    {"name": "email", "type": "string"}
+  ]
+}
