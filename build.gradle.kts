@@ -3,7 +3,7 @@ plugins {
 	kotlin("plugin.spring") version "1.9.25"
 	id("org.springframework.boot") version "3.5.0"
 	id("io.spring.dependency-management") version "1.1.7"
-	id("com.github.davidmc24.gradle.plugin.avro") version "1.9.1" // Avro plugin
+	id("com.example.avro-codegen-plugin") version "1.0.0" // use your plugin's ID and version
 	id("java")
 }
 
@@ -35,8 +35,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.postgresql:postgresql")
-	implementation("org.apache.avro:avro:1.11.1") // Avro library
-	implementation("io.confluent:kafka-avro-serializer:7.5.1") // or match your Confluent platform version
+	implementation("io.confluent:kafka-avro-serializer:7.4.9") // or match your Confluent platform version
 
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -44,10 +43,6 @@ dependencies {
 	}
 }
 
-avro {
-	fieldVisibility.set("PRIVATE")
-	stringType.set("String")
-}
 
 kotlin {
 	compilerOptions {
