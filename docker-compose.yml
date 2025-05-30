@@ -1,19 +1,20 @@
 services:
-  #contacts-app:
-  #  build:
-  #    context: ./  # path to your Spring Boot project folder
-  #  depends_on:
-  #    - kafka
-  #    - schema-registry
-  #    - postgres
-  #  ports:
-  #    - "8080:8080"  # choose a free host port
-  #  environment:
-  #    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contactdb
-  #    SPRING_DATASOURCE_USERNAME: contact
-  #    SPRING_DATASOURCE_PASSWORD: contact
-  #    SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-  #    SCHEMA_REGISTRY_URL: http://schema-registry:8081
+  contacts-app:
+    build:
+      context: ./  # path to your Spring Boot project folder
+    depends_on:
+      - kafka
+      - schema-registry
+      - postgres
+    ports:
+      - "8080:8080"  # choose a free host port
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contactdb
+      SPRING_DATASOURCE_USERNAME: contact
+      SPRING_DATASOURCE_PASSWORD: contact
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      SPRING_KAFKA_PROPERTIES_SCHEMA_REGISTRY_URL: http://schema-registry:8081
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -32,6 +33,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
