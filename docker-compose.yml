@@ -1,19 +1,19 @@
 services:
-  contacts-app:
-    build:
-      context: ./  # path to your Spring Boot project folder
-    depends_on:
-      - kafka
-      - schema-registry
-      - postgres
-    ports:
-      - "8080:8080"  # choose a free host port
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contactdb
-      SPRING_DATASOURCE_USERNAME: contact
-      SPRING_DATASOURCE_PASSWORD: contact
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      SCHEMA_REGISTRY_URL: http://schema-registry:8081
+  #contacts-app:
+  #  build:
+  #    context: ./  # path to your Spring Boot project folder
+  #  depends_on:
+  #    - kafka
+  #    - schema-registry
+  #    - postgres
+  #  ports:
+  #    - "8080:8080"  # choose a free host port
+  #  environment:
+  #    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contactdb
+  #    SPRING_DATASOURCE_USERNAME: contact
+  #    SPRING_DATASOURCE_PASSWORD: contact
+  #    SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  #    SCHEMA_REGISTRY_URL: http://schema-registry:8081
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0

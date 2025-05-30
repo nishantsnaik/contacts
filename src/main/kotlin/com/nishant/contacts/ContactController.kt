@@ -8,27 +8,13 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/contacts")
 class ContactController(
     private val repository: ContactRepository,
-    private val kafkaProducer: KafkaProducerService
+    private val contactService: ContactService
 ) {
 
     @PostMapping
     fun createContact(@RequestBody request: ContactRequest): ResponseEntity<Contact> {
 
-        val entity = Contact(
-            name = request.name,
-            email = request.email
-        )
-        val contact = repository.save(entity)
-
-        // Build Avro Contact and send to Kafka
-        val avroContact =
-            com.nishant.contacts.avro.Contact.newBuilder()
-                .setId(contact.id!!)
-                .setName(contact.name)
-                .setEmail(contact.email)
-                .build()
-
-        kafkaProducer.sendContact(avroContact)
+        val contact =  contactService.create(request)
         return ResponseEntity.ok(contact)
     }
 
